@@ -47,5 +47,11 @@
     "foundry",
     "cli",
     "global"
-  ]
+  ],
+  "foundry": {
+    "releaseCommands": [
+      "foundry-release-git",
+      "foundry-release-npm"
+    ]
+  }
 }
