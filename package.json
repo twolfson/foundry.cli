@@ -1,7 +1,7 @@
 {
   "name": "foundry.cli",
   "description": "Global CLI bindings for foundry",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/twolfson/foundry.cli",
   "author": {
     "name": "Todd Wolfson",

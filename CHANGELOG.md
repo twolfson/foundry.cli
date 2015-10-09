@@ -1,2 +1,4 @@
 # foundry.cli changelog
+1.0.1 - Renamed from `foundry-cli` to `foundry.cli` to resolve `npm` issue
+
 1.0.0 - Initial release
