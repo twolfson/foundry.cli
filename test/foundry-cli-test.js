@@ -22,7 +22,6 @@ describe('foundry.cli running in a directory with `foundry`', function () {
   });
 
   it('added `node_modules/.bin/` to the `PATH`', function () {
-    console.log(this.stdout);
     var actualPaths = JSON.parse(this.stdout).PATH.split(path.delimiter);
     var expectedPath = path.join(__dirname, 'test-files', 'repo-with-foundry', 'node_modules', '.bin');
     expect(actualPaths).to.contain(expectedPath);
