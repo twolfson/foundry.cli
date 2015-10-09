@@ -1,11 +1,11 @@
-# foundry-cli [![Build status](https://travis-ci.org/twolfson/foundry-cli.png?branch=master)](https://travis-ci.org/twolfson/foundry-cli)
+# foundry.cli [![Build status](https://travis-ci.org/twolfson/foundry.cli.png?branch=master)](https://travis-ci.org/twolfson/foundry.cli)
 
 Global CLI bindings for foundry
 
 This was built to run `foundry` and node-based `foundry-release` commands without needing to modify the `PATH` environment variable for every release.
 
 ## Getting Started
-Install the module globally with: `npm install -g foundry-cli`
+Install the module globally with: `npm install -g foundry.cli`
 
 Then, navigate to a project with `foundry` installed and run `foundry` as if it's not inside of `node_modules/`:
 

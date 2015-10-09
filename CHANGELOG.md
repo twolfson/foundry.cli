@@ -1,2 +1,2 @@
-# foundry-cli changelog
+# foundry.cli changelog
 1.0.0 - Initial release
