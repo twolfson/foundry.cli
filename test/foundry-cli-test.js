@@ -1,4 +1,5 @@
 // Load in dependencies
+var path = require('path');
 var expect = require('chai').expect;
 var childUtils = require('./utils/child-process');
 
@@ -8,7 +9,7 @@ var foundryCliCmd =  __dirname + '/../bin/foundry';
 describe('foundry.cli running in a directory with `foundry`', function () {
   // Emulate how `npm` generates the path to `foundry.cli`
   childUtils.spawn('node', [foundryCliCmd, 'hello', 'world'], {
-    cwd: __dirname + '/test-files/repo-with-foundry'
+    cwd: path.join(__dirname, 'test-files', 'repo-with-foundry')
   });
 
   it('has no errors', function () {
@@ -21,7 +22,10 @@ describe('foundry.cli running in a directory with `foundry`', function () {
   });
 
   it('added `node_modules/.bin/` to the `PATH`', function () {
-    expect(JSON.parse(this.stdout).PATH).to.contain(__dirname + '/test-files/repo-with-foundry/node_modules/.bin');
+    var actualPath = JSON.parse(this.stdout).PATH;
+    var expectedPath = __dirname + '/test-files/repo-with-foundry/node_modules/.bin';
+    var delimiterRegexp = new RegExp(path.delimiter, 'g');
+    expect(actualPath.replace(delimiterRegexp, '/')).to.contain(expectedPath.replace(delimiterRegexp, '/'));
   });
 
   it('passes along arguments to `foundry`', function () {
