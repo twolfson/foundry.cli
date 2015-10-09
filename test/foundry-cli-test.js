@@ -13,8 +13,8 @@ describe('foundry-cli running in a directory with `foundry`', function () {
   });
 
   it('has no errors', function () {
-    expect(this.err).to.equal(null);
     expect(this.stderr).to.equal('');
+    expect(this.err).to.equal(null);
   });
 
   it('invokes `foundry`', function () {
