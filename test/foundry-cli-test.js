@@ -1,6 +1,5 @@
 // Load in dependencies
 var expect = require('chai').expect;
-var quote = require('shell-quote').quote;
 var childUtils = require('./utils/child-process');
 
 var foundryCliCmd =  __dirname + '/../bin/foundry';
@@ -8,7 +7,7 @@ var foundryCliCmd =  __dirname + '/../bin/foundry';
 // Start our tests
 describe('foundry.cli running in a directory with `foundry`', function () {
   // Emulate how `npm` generates the path to `foundry.cli`
-  childUtils.exec(quote(['node', foundryCliCmd, 'hello', 'world']), {
+  childUtils.spawn('node', [foundryCliCmd, 'hello', 'world'], {
     cwd: __dirname + '/test-files/repo-with-foundry'
   });
 
@@ -41,7 +40,7 @@ describe('foundry.cli running in a directory with `foundry`', function () {
 
 describe('foundry.cli running in a directory without `foundry`', function () {
   // Emulate how `npm` generates the path to `foundry.cli`
-  childUtils.exec(quote(['node', foundryCliCmd, 'hello', 'world']), {
+  childUtils.spawn('node', [foundryCliCmd, 'hello', 'world'], {
     cwd: __dirname + '/test-files/repo-without-foundry'
   });
 
@@ -58,7 +57,7 @@ describe('foundry.cli running in a directory without `foundry`', function () {
 
 describe('foundry.cli running `foundry` that has an error', function () {
   // Emulate how `npm` generates the path to `foundry.cli`
-  childUtils.exec(quote(['node', foundryCliCmd, 'hello', 'world']), {
+  childUtils.spawn('node', [foundryCliCmd, 'hello', 'world'], {
     cwd: __dirname + '/test-files/repo-with-bad-foundry'
   });
 

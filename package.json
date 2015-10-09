@@ -33,6 +33,7 @@
     "xtend": "~4.0.0"
   },
   "devDependencies": {
+    "buffered-spawn": "~1.1.2",
     "chai": "~3.3.0",
     "foundry": "~4.0.3",
     "foundry-release-git": "~2.0.2",
@@ -40,7 +41,6 @@
     "jscs": "~1.7.3",
     "jshint": "~2.5.10",
     "mocha": "~2.3.3",
-    "shell-quote": "~1.4.3",
     "twolfson-style": "~1.6.0"
   },
   "keywords": [
