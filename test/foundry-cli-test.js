@@ -69,7 +69,8 @@ describe('foundry.cli running `foundry` that has an error', function () {
   });
 
   it('propagates the exit code', function () {
-    expect(this.err.code).to.equal(20);
+    // DEV: Since we are using `buffered-spawn`, this is `err.status` over `err.code`
+    expect(this.err.status).to.equal(20);
   });
 
   it('propagates the stderr', function () {
