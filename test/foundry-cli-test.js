@@ -3,7 +3,7 @@ var path = require('path');
 var expect = require('chai').expect;
 var childUtils = require('./utils/child-process');
 
-var foundryCliCmd =  __dirname + '/../bin/foundry';
+var foundryCliCmd =  path.join(__dirname, '..', 'bin', 'foundry');
 
 // Start our tests
 describe('foundry.cli running in a directory with `foundry`', function () {
@@ -22,10 +22,9 @@ describe('foundry.cli running in a directory with `foundry`', function () {
   });
 
   it('added `node_modules/.bin/` to the `PATH`', function () {
-    var actualPath = JSON.parse(this.stdout).PATH;
-    var expectedPath = __dirname + '/test-files/repo-with-foundry/node_modules/.bin';
-    var delimiterRegexp = new RegExp(path.delimiter, 'g');
-    expect(actualPath.replace(delimiterRegexp, '/')).to.contain(expectedPath.replace(delimiterRegexp, '/'));
+    var actualPaths = JSON.parse(this.stdout).PATH.split(path.delimiter);
+    var expectedPath = path.join(__dirname, 'test-files', 'repo-with-foundry', 'node_modules', '.bin');
+    expect(actualPaths).to.contain(expectedPath);
   });
 
   it('passes along arguments to `foundry`', function () {
@@ -38,14 +37,14 @@ describe('foundry.cli running in a directory with `foundry`', function () {
   });
 
   it('runs the executable in the repo\'s directory', function () {
-    expect(JSON.parse(this.stdout).cwd).to.equal(__dirname + '/test-files/repo-with-foundry');
+    expect(JSON.parse(this.stdout).cwd).to.equal(path.join(__dirname, 'test-files', 'repo-with-foundry'));
   });
 });
 
 describe('foundry.cli running in a directory without `foundry`', function () {
   // Emulate how `npm` generates the path to `foundry.cli`
   childUtils.spawn('node', [foundryCliCmd, 'hello', 'world'], {
-    cwd: __dirname + '/test-files/repo-without-foundry'
+    cwd: path.join(__dirname, 'test-files', 'repo-without-foundry')
   });
 
   it('has an error', function () {
@@ -62,7 +61,7 @@ describe('foundry.cli running in a directory without `foundry`', function () {
 describe('foundry.cli running `foundry` that has an error', function () {
   // Emulate how `npm` generates the path to `foundry.cli`
   childUtils.spawn('node', [foundryCliCmd, 'hello', 'world'], {
-    cwd: __dirname + '/test-files/repo-with-bad-foundry'
+    cwd: path.join(__dirname, 'test-files', 'repo-with-bad-foundry')
   });
 
   it('has an error', function () {
