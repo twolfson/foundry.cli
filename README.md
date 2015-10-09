@@ -1,4 +1,4 @@
-# foundry.cli [![Build status](https://travis-ci.org/twolfson/foundry.cli.png?branch=master)](https://travis-ci.org/twolfson/foundry.cli)
+# foundry.cli [![Build status](https://travis-ci.org/twolfson/foundry.cli.png?branch=master)](https://travis-ci.org/twolfson/foundry.cli) [![Build status](https://ci.appveyor.com/api/projects/status/q2hdwo5g8m0wd71k/branch/master?svg=true)](https://ci.appveyor.com/project/twolfson/foundry-cli/branch/master)
 
 Global CLI bindings for foundry
 
