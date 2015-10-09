@@ -27,7 +27,8 @@ describe('foundry-cli running in a directory with `foundry`', function () {
 
   it('passes along arguments to `foundry`', function () {
     expect(JSON.parse(this.stdout).argv).to.have.length(4);
-    expect(JSON.parse(this.stdout).argv[0]).to.equal('node');
+    // DEV: In `node@4.1` on Travis CI, `node` becomes a full path. Likely due to symlinks
+    expect(JSON.parse(this.stdout).argv[0]).to.match(/(^|\/)node$/);
     expect(JSON.parse(this.stdout).argv[1]).to.match(/\/foundry$/);
     expect(JSON.parse(this.stdout).argv[2]).to.equal('hello');
     expect(JSON.parse(this.stdout).argv[3]).to.equal('world');
