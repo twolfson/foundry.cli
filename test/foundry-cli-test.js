@@ -13,8 +13,9 @@ describe('foundry-cli running in a directory with `foundry`', function () {
   });
 
   it('has no errors', function () {
-    expect(this.stderr).to.equal('');
+    console.log(__dirname, __dirname + '/test-files/repo-with-foundry', foundryCliCmd, quote(['node', foundryCliCmd, 'hello', 'world']));
     expect(this.err).to.equal(null);
+    expect(this.stderr).to.equal('');
   });
 
   it('invokes `foundry`', function () {
