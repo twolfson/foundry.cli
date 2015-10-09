@@ -11,5 +11,11 @@ matrix:
 before_install:
   - curl --location http://rawgit.com/twolfson/fix-travis-ci/master/lib/install.sh | bash -s
 
+script:
+  - which node
+  - ls -la /usr/bin/env
+  - /usr/bin/env node
+  - npm test
+
 notifications:
   email: false
