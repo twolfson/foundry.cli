@@ -2,16 +2,65 @@
 
 Global CLI bindings for foundry
 
-## Getting Started
-Install the module with: `npm install foundry-cli`
+This was built to run `foundry` and node-based `foundry-release` commands without needing to modify the `PATH` environment variable for every release.
 
-```js
-var foundryCli = require('foundry-cli');
-foundryCli(); // 'awesome'
+## Getting Started
+Install the module globally with: `npm install -g foundry-cli`
+
+Then, navigate to a project with `foundry` installed and run `foundry` as if it's not inside of `node_modules/`:
+
+```bash
+foundry commands
+# Lists out commands used for project
+```
+
+Here's a demonstration with a local-only `git` repository
+
+```bash
+# Create git repo
+mkdir foundry-example
+cd foundry-example
+git init
+echo "Hello World" > README.md
+git add README.md
+git commit -m "Added documentation"
+
+# Generate `package.json` with `foundry` config
+cat > package.json <<EOF
+{
+  "foundry": {
+    "releaseCommands": [
+      "foundry-release-git"
+    ]
+  }
+}
+EOF
+
+# Locally install `foundry` and corresponding `git` foundry-release command
+npm install foundry foundry-release-git
+
+# Run our release with the globally installed foundry
+foundry release 1.0.0
+# Configuring steps with FOUNDRY_VERSION: 1.0.0
+# Configuring steps with FOUNDRY_MESSAGE: Release 1.0.0
+# Running step: foundry-release-git update-files "$FOUNDRY_VERSION" "$FOUNDRY_MESSAGE"
+# Running step: foundry-release-git commit "$FOUNDRY_VERSION" "$FOUNDRY_MESSAGE"
+# [master ec7a32d] Release 1.0.0
+# Running step: foundry-release-git register "$FOUNDRY_VERSION" "$FOUNDRY_MESSAGE"
+# Running step: foundry-release-git publish "$FOUNDRY_VERSION" "$FOUNDRY_MESSAGE"
+# Pushes to remote server
+
+# See the release commit and tag
+git log --decorate --oneline
+# c6ce921 (HEAD, tag: 1.0.0, master) Release 1.0.0
+# f0c25b3 Added documentation
 ```
 
 ## Documentation
-_(Coming soon)_
+When installed, we provide a CLI tool with the name `foundry`
+
+```
+```
 
 ## Examples
 _(Coming soon)_
