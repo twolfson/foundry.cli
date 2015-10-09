@@ -59,11 +59,14 @@ git log --decorate --oneline
 ## Documentation
 When installed, we provide a CLI tool with the name `foundry`
 
-```
-```
+```bash
+# Directly invoke `foundry` located in `$PWD/node_modules/.bin/`
+foundry
 
-## Examples
-_(Coming soon)_
+# Help prompt will be for the corresponding `foundry` package
+foundry --help
+# Usage: foundry [options] [command]
+```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint via `npm run lint` and test via `npm test`.
