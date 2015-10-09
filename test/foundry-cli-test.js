@@ -26,7 +26,6 @@ describe('foundry-cli running in a directory with `foundry`', function () {
   });
 
   it('passes along arguments to `foundry`', function () {
-    console.log(this.stdout);
     expect(JSON.parse(this.stdout).argv).to.have.length(4);
     expect(JSON.parse(this.stdout).argv[0]).to.equal('node');
     expect(JSON.parse(this.stdout).argv[1]).to.match(/\/foundry$/);
@@ -53,5 +52,24 @@ describe('foundry-cli running in a directory without `foundry`', function () {
 
   it('has no output', function () {
     expect(this.stdout).to.equal('');
+  });
+});
+
+describe('foundry-cli running `foundry` that has an error', function () {
+  // Emulate how `npm` generates the path to `foundry-cli`
+  childUtils.exec(quote(['node', foundryCliCmd, 'hello', 'world']), {
+    cwd: __dirname + '/test-files/repo-with-bad-foundry'
+  });
+
+  it('has an error', function () {
+    expect(this.err).to.not.equal(null);
+  });
+
+  it('propagates the exit code', function () {
+    expect(this.err.code).to.equal(20);
+  });
+
+  it('propagates the stderr', function () {
+    expect(this.stderr).to.contain('Oh noes. Something went wrong');
   });
 });
