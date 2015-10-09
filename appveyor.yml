@@ -16,6 +16,6 @@ install:
   - npm install
 
 test_script:
-  - npm run test-windows-ci
+  - npm run test-windows
 
 build: off
