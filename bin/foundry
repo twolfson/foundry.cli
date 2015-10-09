@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+// Load our dependencies
+var foundryCli = require('../');
+
+// Invoke foundry CLI
+foundryCli();
