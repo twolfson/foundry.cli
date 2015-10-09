@@ -1,7 +1,7 @@
 // Load in dependencies
 var expect = require('chai').expect;
 var quote = require('shell-quote').quote;
-var childUtils = require('./utils/child');
+var childUtils = require('./utils/child-process');
 
 var foundryCliCmd =  __dirname + '/../bin/foundry';
 
@@ -26,7 +26,16 @@ describe('foundry-cli running in a directory with `foundry`', function () {
   });
 
   it('passes along arguments to `foundry`', function () {
-    expect(JSON.parse(this.stdout).argv).to.deep.equal(['node', 'foundry', 'hello', 'world']);
+    console.log(this.stdout);
+    expect(JSON.parse(this.stdout).argv).to.have.length(4);
+    expect(JSON.parse(this.stdout).argv[0]).to.equal('node');
+    expect(JSON.parse(this.stdout).argv[1]).to.match(/\/foundry$/);
+    expect(JSON.parse(this.stdout).argv[2]).to.equal('hello');
+    expect(JSON.parse(this.stdout).argv[3]).to.equal('world');
+  });
+
+  it('runs the executable in the repo\'s directory', function () {
+    expect(JSON.parse(this.stdout).cwd).to.equal(__dirname + '/test-files/repo-with-foundry');
   });
 });
 
