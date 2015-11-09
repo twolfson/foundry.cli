@@ -78,3 +78,23 @@ describe('foundry.cli running `foundry` that has an error', function () {
     expect(this.stderr).to.contain('Oh noes. Something went wrong');
   });
 });
+
+// DEV: This is a test case to verify we don't break bash completion
+//   Case to reproduce:
+//      Type `foundry rel<tab>` in non-git directory
+//      Navigate to git directory
+//      Type `git checkout or<tab>`
+//      Expected: Autocompletes to `git checkout origin/`
+//      Actual: No autocompletion takes place yet it works in a fresh tab
+describe('foundry.cli running completion in a directory without `foundry`', function () {
+  // Emulate how `npm` generates the path to `foundry.cli`
+  childUtils.spawn('node', [foundryCliCmd, 'completion', '--', 'foundry rel'], {
+    cwd: path.join(__dirname, 'test-files', 'repo-without-foundry')
+  });
+
+  it('silently exits', function () {
+    expect(this.err).to.equal(null);
+    expect(this.stdout).to.equal('');
+    expect(this.stderr).to.equal('');
+  });
+});
